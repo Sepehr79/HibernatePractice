@@ -3,21 +3,29 @@ package com.hibernateforeignkeys.testforeignkeys;
 import com.hibernateforeignkeys.beans.*;
 import com.hibernateforeignkeys.config.ORMConfig;
 import org.hibernate.Session;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
 public class ForeignKeysTest {
 
-    @Test
-    public void testGetStudentsWithForeign(){
-        Session session = ORMConfig.getSessionFactory().openSession();
+    private Session session;
+
+    @Before
+    public void openSession(){
+        session = ORMConfig.getSessionFactory().openSession();
+    }
+
+    @After
+    public void closeSession(){
+        session.close();
     }
 
     @Test
     public void addStudent(){
-        Session session = ORMConfig.getSessionFactory().openSession();
         try{
             session.beginTransaction();
 
@@ -36,38 +44,26 @@ public class ForeignKeysTest {
 
     @Test
     public void testGetStudentGenderUni(){
-
-        try(Session session = ORMConfig.getSessionFactory().openSession()){
-            Student student = session.find(Student.class, 1);
-            System.out.println(student);
-            Assert.assertEquals(student.getUni().getName(), "tehran");
-            Assert.assertEquals(student.getGender().getName(), "MALE");
-        }
+        Student student = session.find(Student.class, 36);
+        System.out.println(student);
+        Assert.assertEquals(student.getUni().getName(), "tehran");
     }
 
     @Test
     public void getStudentsByGender(){
-
-        try(Session session = ORMConfig.getSessionFactory().openSession()){
-            List<Student> students = session.find(Gender.class, 1).getStudents();
-            Assert.assertEquals(students.size(), 1);
-            Assert.assertEquals(students.get(0).getName(), "sepehr");
-        }
-
+        List<Student> students = session.find(Gender.class, 1).getStudents();
+        Assert.assertEquals(students.size(), 1);
+        Assert.assertEquals(students.get(0).getName(), "sepehr");
     }
 
     @Test
     public void addTeacher(){
-
-        try(Session session = ORMConfig.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            Teacher teacher = new Teacher();
-            teacher.setName("ahmad");
-            teacher.setId(1);
-            session.save(teacher);
-            session.getTransaction().commit();
-        }
-
+        session.beginTransaction();
+        Teacher teacher = new Teacher();
+        teacher.setName("hosein");
+        teacher.setId(6);
+        session.save(teacher);
+        session.getTransaction().commit();
     }
 
     @Test
@@ -158,6 +154,11 @@ public class ForeignKeysTest {
             session.update(uni);
             session.getTransaction().commit();
         }
+    }
 
+    @Test
+    public void testHQL(){
+        List people = session.createQuery("from Person").list();
+        Assert.assertEquals(people.size(), 0);
     }
 }

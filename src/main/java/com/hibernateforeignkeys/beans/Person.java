@@ -12,6 +12,9 @@ public class Person {
     private int id;
 
     @Column
+    private int age;
+
+    @Column
     private String name;
 
     @OneToOne
@@ -41,4 +44,11 @@ public class Person {
         this.name = name;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

@@ -26,20 +26,12 @@ public class ForeignKeysTest {
 
     @Test
     public void addStudent(){
-        try{
-            session.beginTransaction();
-
-            Uni uni = session.find(Uni.class, 1);
+        session.beginTransaction();
+            Uni uni = session.find(Uni.class, 4);
             Gender gender = session.find(Gender.class, 1);
-            Student student = new Student("mojtaba", "ahmadi", 20, 36, uni, gender);
+            Student student = new Student("hosein", "rezaei", 30, 982116233, uni, gender);
             session.save(student);
-
-
-
             session.getTransaction().commit();
-        }catch (Exception exception){
-            session.getTransaction().rollback();
-        }
     }
 
     @Test

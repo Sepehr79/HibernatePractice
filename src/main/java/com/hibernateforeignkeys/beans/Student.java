@@ -8,6 +8,9 @@ import java.util.Date;
 
 @Entity
 @Table
+@NamedQueries(
+        @NamedQuery(name = "getById", query = "from Student where id = :id")
+)
 public class Student {
     @Id
     @Column
@@ -22,11 +25,11 @@ public class Student {
     @Column
     private int age;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "uni_name")
     private Uni uni;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "gender")
     private Gender gender;
 
@@ -38,6 +41,11 @@ public class Student {
     @UpdateTimestamp
     private Date lastUpdateDate;
 
+    public Student(String name, String lastName, int id){
+        this.name = name;
+        this.lastName = lastName;
+        this.id = id;
+    }
 
     public Student(String name, String lastName, int age, int id, Uni uni, Gender gender) {
         this.id = id;
@@ -114,5 +122,19 @@ public class Student {
 
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", uni=" + uni +
+                ", gender=" + gender +
+                ", registerDate=" + registerDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                '}';
     }
 }

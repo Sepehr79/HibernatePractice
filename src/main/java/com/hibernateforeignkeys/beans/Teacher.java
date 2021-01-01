@@ -13,7 +13,7 @@ public class Teacher {
     @Column
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "teacher_course",joinColumns = @JoinColumn(name = "teacher_id"), inverseJoinColumns = @JoinColumn(name = "courese_id"))
     private List<Courese> courseList;
 

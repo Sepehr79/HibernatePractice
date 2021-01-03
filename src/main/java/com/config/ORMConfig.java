@@ -1,4 +1,4 @@
-package com.hibernateforeignkeys.config;
+package com.config;
 
 import com.hibernateforeignkeys.beans.*;
 import org.hibernate.SessionFactory;
@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 
 public class ORMConfig {
 
-    private static SessionFactory sessionFactory;
+    private static final SessionFactory sessionFactory;
 
     static {
         sessionFactory = new Configuration().configure("hibernate.cfg.xml").
@@ -28,7 +28,4 @@ public class ORMConfig {
         return sessionFactory;
     }
 
-    public static void setSessionFactory(SessionFactory sessionFactory) {
-        ORMConfig.sessionFactory = sessionFactory;
-    }
 }

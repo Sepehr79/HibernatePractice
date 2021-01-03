@@ -1,4 +1,4 @@
-package com.hibernateforeignkeys.config;
+package com.config;
 
 import org.hibernate.Session;
 import org.junit.Test;

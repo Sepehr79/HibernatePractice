@@ -1,8 +1,7 @@
-package com.hibernateforeignkeys.hql;
+package com.hql;
 
-import com.hibernateforeignkeys.beans.Person;
 import com.hibernateforeignkeys.beans.Student;
-import com.hibernateforeignkeys.config.ORMConfig;
+import com.config.ORMConfig;
 import org.hibernate.Session;
 import org.junit.After;
 import org.junit.Assert;

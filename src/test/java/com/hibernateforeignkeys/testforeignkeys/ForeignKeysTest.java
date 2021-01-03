@@ -1,7 +1,7 @@
 package com.hibernateforeignkeys.testforeignkeys;
 
 import com.hibernateforeignkeys.beans.*;
-import com.hibernateforeignkeys.config.ORMConfig;
+import com.config.ORMConfig;
 import org.hibernate.Session;
 import org.junit.After;
 import org.junit.Assert;

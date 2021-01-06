@@ -17,6 +17,11 @@ public class ORMConfig {
                 addAnnotatedClass(Teacher.class).
                 addAnnotatedClass(Courese.class).
                 addAnnotatedClass(FingerPrint.class).
+                addAnnotatedClass(Programmer.class).
+                addAnnotatedClass(Animal.class).
+                addAnnotatedClass(Cat.class).
+                addAnnotatedClass(Computer.class).
+                addAnnotatedClass(ASUSComputer.class).
                 buildSessionFactory();
     }
 

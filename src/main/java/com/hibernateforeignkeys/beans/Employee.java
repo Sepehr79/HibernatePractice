@@ -6,27 +6,19 @@ import javax.persistence.*;
 @Table
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "person")
-public class Person {
+@DiscriminatorValue("EMP")
+public class Employee {
     @Id
-    private int id;
+    public int id;
+
+    @Column(nullable = false)
+    public String name;
+
+    @Column(nullable = false)
+    public String lastName;
 
     @Column
     private int age;
-
-    @Column
-    private String name;
-
-    @OneToOne
-    private FingerPrint fingerPrint;
-
-    public FingerPrint getFingerPrint() {
-        return fingerPrint;
-    }
-
-    public void setFingerPrint(FingerPrint fingerPrint) {
-        this.fingerPrint = fingerPrint;
-    }
 
     public int getId() {
         return id;
@@ -42,6 +34,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getAge() {
